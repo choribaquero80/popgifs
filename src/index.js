@@ -1,12 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import './index.css';
-import App from './App';
+
+import store from "./app/store/store";
+
 import * as serviceWorker from './serviceWorker';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
+
+import Body from './app/components/Body';
+import ImagesListScreen from './app/components/ImagesListScreen';
+import ImageDetailScreen from './app/containers/ImageDetailScreen';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <Router>
+        <Body>
+          <Route exact path="/" component={ImagesListScreen} />
+          <Route path="/gif/:id" component={ImageDetailScreen} />
+        </Body>
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
